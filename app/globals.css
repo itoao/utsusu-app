@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+:root {
+  /* 墨と和紙 - より深みのある色 */
+  --sumi: 220 25% 12%;
+  --sumi-light: 220 15% 35%;
+  --washi: 45 30% 97%;
+  --washi-dark: 45 15% 94%;
+
+  --background: 45 30% 97%;
+  --foreground: 220 25% 12%;
+  --card: 0 0% 100%;
+  --card-foreground: 220 25% 12%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 220 25% 12%;
+  --primary: 220 25% 12%;
+  --primary-foreground: 45 30% 97%;
+  --secondary: 45 15% 92%;
+  --secondary-foreground: 220 25% 12%;
+  --muted: 45 12% 92%;
+  --muted-foreground: 220 10% 45%;
+  --accent: 220 25% 12%;
+  --accent-foreground: 45 30% 97%;
+  --border: 45 12% 85%;
+  --ring: 220 20% 30%;
+}
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-border: hsl(var(--border));
+  --color-ring: hsl(var(--ring));
+  --color-sumi: hsl(var(--sumi));
+  --color-sumi-light: hsl(var(--sumi-light));
+  --color-washi: hsl(var(--washi));
+  --color-washi-dark: hsl(var(--washi-dark));
+  --font-sans: var(--font-utsusu-sans);
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-utsusu-sans), "Hiragino Kaku Gothic ProN", "Yu Gothic",
+    "Meiryo", "Noto Sans JP", system-ui, sans-serif;
+  letter-spacing: 0.02em;
+  font-feature-settings: "palt";
+}
+
+/* スムーズなスクロール */
+html {
+  scroll-behavior: smooth;
+}
+
+/* フォーカス */
+:focus-visible {
+  outline: none;
+}
+
+/* スクロールバー */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--sumi) / 0.15);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--sumi) / 0.25);
+}
+
+/* 選択時の色 */
+::selection {
+  background: hsl(var(--sumi) / 0.15);
+}
+
+/* アニメーション */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}

@@ -75,11 +75,11 @@ export default function LandingPage() {
             : ""
         }`}
       >
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:px-12">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 md:px-12">
           <p className="text-sm font-medium tracking-wide">Utsusu</p>
           <Link
             href="/"
-            className="rounded-sm bg-foreground px-5 py-2 text-xs font-medium text-primary-foreground transition-colors hover:bg-foreground/90"
+            className="rounded-sm accent-fill accent-shadow px-5 py-2 text-xs font-medium transition-all hover:brightness-110"
           >
             はじめる
           </Link>
@@ -87,7 +87,7 @@ export default function LandingPage() {
       </nav>
 
       {/* ヒーローセクション */}
-      <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
+      <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 accent-veil md:px-12">
         {/* 縦書きアクセント */}
         <div className="pointer-events-none absolute right-8 top-1/4 hidden text-[11px] tracking-[0.5em] text-foreground/[0.08] md:block [writing-mode:vertical-rl]">
           話した内容を、投稿に写す
@@ -125,7 +125,7 @@ export default function LandingPage() {
           >
             <Link
               href="/"
-              className="inline-block bg-foreground px-10 py-4 text-sm font-medium tracking-wide text-primary-foreground transition-all hover:bg-foreground/90 active:scale-[0.98]"
+              className="inline-block w-full rounded-sm accent-fill accent-shadow px-10 py-4 text-sm font-medium tracking-wide transition-all hover:brightness-110 active:scale-[0.98] md:w-auto"
             >
               無料ではじめる
             </Link>
@@ -142,7 +142,7 @@ export default function LandingPage() {
       </section>
 
       {/* 課題セクション */}
-      <section className="relative px-6 py-32 md:py-48">
+      <section className="relative px-4 py-28 md:px-12 md:py-48">
         <div className="pointer-events-none absolute -left-4 top-32 hidden text-[180px] font-extralight leading-none text-foreground/[0.02] md:block">
           01
         </div>
@@ -154,11 +154,11 @@ export default function LandingPage() {
             </p>
           </FadeIn>
           <FadeIn delay={100}>
-            <h2 className="text-2xl font-light leading-relaxed tracking-tight md:text-4xl">
-              動画は作れる。
-              <br />
-              でも、<span className="font-normal">書く</span>のが苦痛。
-            </h2>
+          <h2 className="text-2xl font-light leading-relaxed tracking-tight md:text-4xl">
+            動画は作れる。
+            <br />
+            でも、<span className="font-normal accent-text">書く</span>のが苦痛。
+          </h2>
           </FadeIn>
           <FadeIn delay={200}>
             <div className="mt-12 space-y-6 text-[15px] leading-8 text-muted-foreground md:text-base">
@@ -179,7 +179,7 @@ export default function LandingPage() {
       </section>
 
       {/* 解決策セクション */}
-      <section className="relative bg-foreground/[0.02] px-6 py-32 md:py-48">
+      <section className="relative bg-foreground/[0.02] px-4 py-28 md:px-12 md:py-48">
         <div className="pointer-events-none absolute -right-4 top-32 hidden text-[180px] font-extralight leading-none text-foreground/[0.02] md:block">
           02
         </div>
@@ -236,7 +236,7 @@ export default function LandingPage() {
       </section>
 
       {/* 出力例セクション */}
-      <section className="relative px-6 py-32 md:py-48">
+      <section className="relative px-4 py-28 md:px-12 md:py-48">
         <div className="pointer-events-none absolute -left-4 top-32 hidden text-[180px] font-extralight leading-none text-foreground/[0.02] md:block">
           03
         </div>
@@ -261,7 +261,7 @@ export default function LandingPage() {
                   <RiTwitterXFill className="h-5 w-5" />
                   <span className="text-sm text-muted-foreground">スレッド形式</span>
                 </div>
-                <div className="space-y-3 rounded-sm bg-white p-6 shadow-sm">
+                <div className="space-y-3 rounded-sm border border-foreground/10 bg-white p-6">
                   {[
                     "動画で話した内容を、投稿にうつすだけの話。結局いちばん時間がかかるのは書くことでした。",
                     "今回の動画は、作業量を減らす工夫よりも、投稿の形を先に決めるだけでラクになる話です。",
@@ -281,10 +281,10 @@ export default function LandingPage() {
             <FadeIn delay={300}>
               <div className="space-y-6">
                 <div className="flex items-center gap-3">
-                  <span className="text-lg font-bold tracking-tight text-[#41C9B4]">note</span>
+                  <span className="text-lg font-medium tracking-tight accent-text">note</span>
                   <span className="text-sm text-muted-foreground">要約記事</span>
                 </div>
-                <div className="space-y-4 rounded-sm bg-white p-6 shadow-sm">
+                <div className="space-y-4 rounded-sm border border-foreground/10 bg-white p-6">
                   <h4 className="font-medium">動画を、投稿にうつす</h4>
                   <div className="space-y-3 text-sm leading-relaxed text-foreground/70">
                     <p>
@@ -305,7 +305,7 @@ export default function LandingPage() {
       </section>
 
       {/* 使い方セクション */}
-      <section className="relative bg-foreground/[0.02] px-6 py-32 md:py-48">
+      <section className="relative bg-foreground/[0.02] px-4 py-28 md:px-12 md:py-48">
         <div className="pointer-events-none absolute -right-4 top-32 hidden text-[180px] font-extralight leading-none text-foreground/[0.02] md:block">
           04
         </div>
@@ -369,7 +369,7 @@ export default function LandingPage() {
       </section>
 
       {/* 料金セクション */}
-      <section className="relative px-6 py-32 md:py-48">
+      <section className="relative px-4 py-28 md:px-12 md:py-48">
         <div className="pointer-events-none absolute -left-4 top-32 hidden text-[180px] font-extralight leading-none text-foreground/[0.02] md:block">
           05
         </div>
@@ -403,7 +403,7 @@ export default function LandingPage() {
               <div className="mt-10">
                 <Link
                   href="/"
-                  className="inline-block w-full bg-foreground px-10 py-4 text-sm font-medium tracking-wide text-primary-foreground transition-all hover:bg-foreground/90 active:scale-[0.98]"
+                  className="inline-block w-full rounded-sm accent-fill accent-shadow px-10 py-4 text-sm font-medium tracking-wide transition-all hover:brightness-110 active:scale-[0.98]"
                 >
                   はじめる
                 </Link>
@@ -414,7 +414,7 @@ export default function LandingPage() {
       </section>
 
       {/* CTAセクション */}
-      <section className="relative bg-foreground px-6 py-32 text-primary-foreground md:py-48">
+      <section className="relative bg-foreground/[0.02] px-4 py-28 text-foreground md:px-12 md:py-48 accent-veil">
         <div className="mx-auto max-w-2xl text-center">
           <FadeIn>
             <h2 className="text-2xl font-light leading-relaxed tracking-tight md:text-4xl">
@@ -424,7 +424,7 @@ export default function LandingPage() {
             </h2>
           </FadeIn>
           <FadeIn delay={100}>
-            <p className="mt-6 text-sm text-primary-foreground/70 md:text-base">
+            <p className="mt-6 text-sm text-muted-foreground md:text-base">
               書くのが苦手でも、発信は続けられる。
             </p>
           </FadeIn>
@@ -432,7 +432,7 @@ export default function LandingPage() {
             <div className="mt-12">
               <Link
                 href="/"
-                className="inline-block border border-primary-foreground/20 bg-primary-foreground px-10 py-4 text-sm font-medium tracking-wide text-foreground transition-all hover:bg-primary-foreground/90 active:scale-[0.98]"
+                className="inline-block w-full rounded-sm accent-fill accent-shadow px-10 py-4 text-sm font-medium tracking-wide transition-all hover:brightness-110 active:scale-[0.98] md:w-auto"
               >
                 無料ではじめる
               </Link>
@@ -442,7 +442,7 @@ export default function LandingPage() {
       </section>
 
       {/* フッター */}
-      <footer className="border-t border-foreground/5 px-6 py-8">
+      <footer className="border-t border-foreground/5 px-4 py-8 md:px-12">
         <div className="mx-auto flex max-w-6xl items-center justify-between">
           <p className="text-xs text-muted-foreground">
             Utsusu

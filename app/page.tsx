@@ -55,7 +55,7 @@ export default function Home() {
   const [loadingStep, setLoadingStep] = useState(0);
   const [history, setHistory] = useState<OutputData[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showPaywall, setShowPaywall] = useState(false);
   const [isPaid, setIsPaid] = useState(false); // モック: 課金状態
   const [usageCount, setUsageCount] = useState(0); // 今月の使用回数
@@ -156,6 +156,18 @@ export default function Home() {
     }
   }, [output, isLoading]);
 
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const sync = () => setSidebarOpen(mq.matches);
+    sync();
+    if (mq.addEventListener) {
+      mq.addEventListener("change", sync);
+      return () => mq.removeEventListener("change", sync);
+    }
+    mq.addListener(sync);
+    return () => mq.removeListener(sync);
+  }, []);
+
   return (
     <div className="flex h-screen overflow-hidden">
       {/* サイドバー */}
@@ -238,7 +250,7 @@ export default function Home() {
                 ) : (
                   <button
                     onClick={() => setShowPaywall(true)}
-                    className="text-[10px] text-emerald-600 hover:underline"
+                    className="text-[10px] text-muted-foreground transition-colors hover:text-foreground hover:underline"
                   >
                     {usageCount >= FREE_LIMIT ? "プランに登録" : `お試し ${FREE_LIMIT - usageCount} 回`}
                   </button>
@@ -258,30 +270,30 @@ export default function Home() {
       </button>
 
       {/* メインコンテンツ */}
-      <main className="flex-1 overflow-y-auto">
-        <div className="mx-auto max-w-3xl px-6 py-12 md:px-12 md:py-16">
+      <main className="flex-1 overflow-y-auto accent-veil">
+        <div className="mx-auto max-w-3xl px-4 py-10 md:px-12 md:py-16">
           {/* 入力セクション - 常に表示 */}
           {!activeId && !isLoading && (
             <section className="animate-fade-up">
               <h1 className="text-3xl font-light leading-tight tracking-tight md:text-5xl">
                 動画を、
                 <br />
-                <span className="font-normal">投稿</span>にうつす。
+                <span className="font-normal accent-text">投稿</span>にうつす。
               </h1>
 
-              <div className="mt-12 space-y-8">
+              <div className="mt-10 space-y-7 md:mt-12 md:space-y-8">
                 <div className="group relative">
                   <input
                     type="url"
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
                     placeholder="YouTube URL"
-                    className="w-full border-b-2 border-foreground/10 bg-transparent py-4 text-lg placeholder:text-foreground/25 focus:border-foreground/40 focus:outline-none transition-colors duration-300"
+                    className="w-full rounded-md border border-foreground/10 bg-white/80 px-4 py-4 text-base placeholder:text-foreground/25 focus:border-transparent focus:outline-none transition-colors duration-300 md:text-lg"
                   />
-                  <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-foreground transition-all duration-500 group-focus-within:w-full" />
+                  <div className="pointer-events-none absolute inset-0 rounded-md opacity-0 transition-opacity duration-500 accent-gradient-soft group-focus-within:opacity-100" />
                 </div>
 
-                <div className="flex flex-wrap items-center gap-4">
+                <div className="flex flex-wrap items-center gap-3 md:gap-4">
                   <Select value={postType} onValueChange={setPostType}>
                     <SelectTrigger className="h-auto w-auto gap-2 border-0 bg-transparent p-0 text-sm font-medium shadow-none transition-colors hover:text-foreground/70 focus:ring-0 focus:ring-offset-0 [&>svg]:opacity-40">
                       <SelectValue />
@@ -322,10 +334,9 @@ export default function Home() {
                 <button
                   onClick={handleSubmit}
                   disabled={!isValidUrl}
-                  className="group relative overflow-hidden bg-foreground px-8 py-4 text-sm font-medium tracking-wide text-primary-foreground transition-all hover:bg-foreground/90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40"
+                  className="accent-fill accent-shadow w-full rounded-md px-8 py-4 text-sm font-medium tracking-wide transition-all hover:brightness-110 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 md:w-auto"
                 >
-                  <span className="relative z-10">投稿を作る</span>
-                  <div className="absolute inset-0 -translate-x-full bg-white/10 transition-transform duration-300 group-hover:translate-x-0" />
+                  投稿を作る
                 </button>
                 {url && !isValidUrl && (
                   <p className="text-xs text-muted-foreground">
@@ -340,7 +351,7 @@ export default function Home() {
           {isLoading && (
             <section className="flex min-h-[50vh] items-center justify-center">
               <div className="flex flex-col items-center gap-6">
-                <div className="h-6 w-6 animate-spin rounded-full border-2 border-foreground/20 border-t-foreground" />
+                <div className="h-6 w-6 animate-spin rounded-full border-2 border-foreground/15 border-t-[hsl(var(--accent-from))]" />
                 <p className="text-sm text-muted-foreground">
                   {loadingSteps[loadingStep]}
                 </p>
@@ -352,13 +363,13 @@ export default function Home() {
           {output && !isLoading && (
             <section ref={outputRef} className="animate-fade-up scroll-mt-8">
               <div className="mb-8 flex items-center gap-3">
-                <div className="h-2 w-2 rounded-full bg-emerald-500" />
+                <div className="h-2.5 w-2.5 rounded-full accent-gradient accent-shadow" />
                 <p className="text-sm text-muted-foreground">
                   このまま投稿できます
                 </p>
               </div>
 
-              <div className="grid gap-16">
+              <div className="grid gap-12 md:gap-16">
                 {/* X スレッド */}
                 <div className="space-y-6">
                   <div className="flex items-center justify-between border-b border-foreground/10 pb-3">
@@ -371,7 +382,9 @@ export default function Home() {
                       className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                     >
                       {copied === "all-threads" ? (
-                        <span className="text-emerald-600">コピーしました</span>
+                        <span className="accent-gradient bg-clip-text text-transparent">
+                          コピーしました
+                        </span>
                       ) : (
                         "まとめてコピー"
                       )}
@@ -382,7 +395,7 @@ export default function Home() {
                     {output.threads.map((thread, index) => (
                       <div
                         key={index}
-                        className="group relative grid grid-cols-[auto_1fr_auto] gap-4 py-4 transition-colors hover:bg-foreground/[0.02]"
+                        className="group relative grid grid-cols-[auto_1fr_auto] gap-3 py-4 transition-colors hover:bg-foreground/[0.02] md:gap-4"
                       >
                         <span className="pt-0.5 text-xs tabular-nums text-muted-foreground/60">
                           {String(index + 1).padStart(2, "0")}
@@ -398,7 +411,7 @@ export default function Home() {
                           className="self-start pt-0.5 text-xs text-transparent transition-colors group-hover:text-muted-foreground hover:text-foreground"
                         >
                           {copied === `thread-${index}` ? (
-                            <span className="text-emerald-600">済</span>
+                            <span className="accent-gradient bg-clip-text text-transparent">済</span>
                           ) : (
                             "コピー"
                           )}
@@ -412,7 +425,9 @@ export default function Home() {
                 <div className="space-y-6">
                   <div className="flex items-center justify-between border-b border-foreground/10 pb-3">
                     <div className="flex items-center gap-3">
-                      <span className="text-xl font-bold tracking-tight text-[#41C9B4]">note</span>
+                      <span className="text-xl font-medium tracking-tight accent-text">
+                        note
+                      </span>
                       <span className="text-xs text-muted-foreground">要約記事</span>
                     </div>
                     <button
@@ -425,7 +440,9 @@ export default function Home() {
                       className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                     >
                       {copied === "note-body" ? (
-                        <span className="text-emerald-600">コピーしました</span>
+                        <span className="accent-gradient bg-clip-text text-transparent">
+                          コピーしました
+                        </span>
                       ) : (
                         "本文コピー"
                       )}
@@ -439,10 +456,10 @@ export default function Home() {
                         <button
                           key={index}
                           onClick={() => setSelectedTitle(index)}
-                          className={`border px-4 py-2 text-sm transition-all ${
+                          className={`px-4 py-2 text-sm transition-all ${
                             selectedTitle === index
-                              ? "border-foreground bg-foreground text-primary-foreground"
-                              : "border-foreground/15 text-foreground/70 hover:border-foreground/30 hover:text-foreground"
+                              ? "accent-border bg-white text-foreground"
+                              : "border border-foreground/15 text-foreground/70 hover:border-foreground/30 hover:text-foreground"
                           }`}
                         >
                           {title}
@@ -451,7 +468,7 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="rounded-sm bg-white p-6 shadow-sm">
+                  <div className="rounded-sm border border-foreground/10 bg-white p-5 md:p-6">
                     <article className="space-y-5">
                       <h3 className="text-lg font-medium leading-relaxed">
                         {output.noteTitles[selectedTitle]}
@@ -489,8 +506,8 @@ export default function Home() {
 
       {/* Paywall モーダル */}
       {showPaywall && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/50 backdrop-blur-sm">
-          <div className="mx-4 w-full max-w-md animate-fade-up rounded-sm bg-background p-8 shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/70 backdrop-blur-sm">
+          <div className="mx-4 w-full max-w-md animate-fade-up rounded-sm border border-foreground/10 bg-background p-6 md:p-8">
             <div className="text-center">
               <p className="text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground">
                 Utsusu
@@ -526,7 +543,7 @@ export default function Home() {
                     setIsPaid(true);
                     setShowPaywall(false);
                   }}
-                  className="w-full bg-foreground py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-foreground/90"
+                  className="w-full rounded-md accent-fill accent-shadow py-3 text-sm font-medium transition-all hover:brightness-110"
                 >
                   登録する
                 </button>

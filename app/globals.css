@@ -1,28 +1,32 @@
 @import "tailwindcss";
 
 :root {
-  /* 墨と和紙 - より深みのある色 */
-  --sumi: 220 25% 12%;
-  --sumi-light: 220 15% 35%;
-  --washi: 45 30% 97%;
-  --washi-dark: 45 15% 94%;
+  /* 基本トーン */
+  --sumi: 0 0% 7%;
+  --sumi-light: 0 0% 40%;
+  --washi: 0 0% 99%;
+  --washi-dark: 0 0% 96%;
 
-  --background: 45 30% 97%;
-  --foreground: 220 25% 12%;
+  --background: 0 0% 99%;
+  --foreground: 0 0% 7%;
   --card: 0 0% 100%;
-  --card-foreground: 220 25% 12%;
+  --card-foreground: 0 0% 7%;
   --popover: 0 0% 100%;
-  --popover-foreground: 220 25% 12%;
-  --primary: 220 25% 12%;
-  --primary-foreground: 45 30% 97%;
-  --secondary: 45 15% 92%;
-  --secondary-foreground: 220 25% 12%;
-  --muted: 45 12% 92%;
-  --muted-foreground: 220 10% 45%;
-  --accent: 220 25% 12%;
-  --accent-foreground: 45 30% 97%;
-  --border: 45 12% 85%;
-  --ring: 220 20% 30%;
+  --popover-foreground: 0 0% 7%;
+  --primary: 0 0% 7%;
+  --primary-foreground: 0 0% 99%;
+  --secondary: 0 0% 96%;
+  --secondary-foreground: 0 0% 12%;
+  --muted: 0 0% 96%;
+  --muted-foreground: 0 0% 42%;
+  --accent: 0 0% 7%;
+  --accent-foreground: 0 0% 99%;
+  --border: 0 0% 90%;
+  --ring: 0 0% 75%;
+
+  /* ロゴ由来アクセント（暖色→寒色） */
+  --accent-from: 18 82% 60%;
+  --accent-to: 210 82% 58%;
 }
 
 @theme inline {
@@ -58,7 +62,7 @@ body {
   color: hsl(var(--foreground));
   font-family: var(--font-utsusu-sans), "Hiragino Kaku Gothic ProN", "Yu Gothic",
     "Meiryo", "Noto Sans JP", system-ui, sans-serif;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   font-feature-settings: "palt";
 }
 
@@ -92,7 +96,78 @@ html {
 
 /* 選択時の色 */
 ::selection {
-  background: hsl(var(--sumi) / 0.15);
+  background: hsl(var(--foreground) / 0.12);
+}
+
+/* アクセント */
+.accent-gradient {
+  background-image: linear-gradient(
+    100deg,
+    hsl(var(--accent-from)),
+    hsl(var(--accent-to))
+  );
+}
+
+.accent-gradient-soft {
+  background-image: linear-gradient(
+    100deg,
+    hsl(var(--accent-from) / 0.2),
+    hsl(var(--accent-to) / 0.2)
+  );
+}
+
+.accent-fill {
+  background-image: linear-gradient(
+    100deg,
+    hsl(var(--accent-from)),
+    hsl(var(--accent-to))
+  );
+  color: hsl(var(--washi));
+}
+
+.accent-text {
+  background-image: linear-gradient(
+    100deg,
+    hsl(var(--accent-from)),
+    hsl(var(--accent-to))
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.accent-shadow {
+  box-shadow: 0 14px 30px hsl(var(--accent-from) / 0.2),
+    0 6px 16px hsl(var(--accent-to) / 0.18);
+}
+
+.accent-veil {
+  background-image:
+    radial-gradient(
+      circle at 10% 10%,
+      hsl(var(--accent-from) / 0.18),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 85% 15%,
+      hsl(var(--accent-to) / 0.18),
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 50% 90%,
+      hsl(var(--accent-from) / 0.12),
+      transparent 55%
+    );
+}
+
+.accent-border {
+  border: 1px solid transparent;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(
+    100deg,
+    hsl(var(--accent-from) / 0.7),
+    hsl(var(--accent-to) / 0.7)
+  );
 }
 
 /* アニメーション */
